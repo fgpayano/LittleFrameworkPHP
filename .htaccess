@@ -1,0 +1,6 @@
+RewriteEngine on
+
+RewriteRule ^(\w+)/(\w+)/*$ index.php?c=$1&m=$2
+
+RewriteRule ^empleado index.php
+
