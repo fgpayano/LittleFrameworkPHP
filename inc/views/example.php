@@ -11,7 +11,7 @@
 			<h1>Welcome to Little Framework PHP</h1>
 			<p><strong>It's a MVC PHP framework that you may use in your small projects.</strong></p>
 
-			<p class="line">Feel free to fork the <a href="">repository</a> to contribute with the improvement of this Framework.</p>
+			<p class="line">Feel free to fork the <a href="https://github.com/fgpayano/LittleFrameworkPHP/tree/master" target="_blank">repository</a> to contribute with the improvement of this Framework.</p>
 
 			<h2>Creating a static view</h2>
 
