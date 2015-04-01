@@ -1,6 +1,7 @@
+Options +FollowSymlinks
 RewriteEngine on
+RewriteBase /
 
 RewriteRule ^(\w+)/(\w+)/*$ index.php?c=$1&m=$2
 
-RewriteRule ^empleado index.php
-
+RewriteRule ^example index.php

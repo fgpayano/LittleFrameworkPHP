@@ -1,16 +1,16 @@
 <?php
   
   /**
-   * Controller
+   * ErrorHandle
    * 
-   * @package    controllers
+   * @package    helpers
    * @version 	 1.0
    * @author     Francis Goris Payano <fgpayano@gmail.com>
    */
-
-	abstract class Controller 
+   
+	public static class ErrorHandle
 	{
-		
+	
 	}
 
 ?>
