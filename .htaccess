@@ -2,6 +2,9 @@ Options +FollowSymlinks
 RewriteEngine on
 RewriteBase /
 
-RewriteRule ^(\w+)/(\w+)/*$ index.php?c=$1&m=$2
+#RewriteRule ^test_helper(\/)?$ /index.php?c=example&m=testHelper [NC]
 
-RewriteRule ^example index.php
+#RewriteRule ^(\w)+(\/)?$ index.php [NC]
+
+RewriteRule ^(\w+)/?((\w+)?)$ index.php?c=$1&m=$2 [L,NC]
+
