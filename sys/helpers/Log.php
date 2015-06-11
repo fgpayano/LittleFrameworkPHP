@@ -1,97 +1,99 @@
 <?php
   
-  /**
-   * Log
-   * 
-   * @package    helpers
-   * @version 	 1.0
-   * @author     Francis Goris Payano <fgpayano@gmail.com>
-   */
-   
-	class Log
+/**
+* Log
+* 
+* @package    helpers
+* @version 	 1.0
+* @author     Francis Goris Payano <fgpayano@gmail.com>
+*/
+
+namespace helpers;
+
+class Log
+{
+
+	static $logFile = "error.log";
+
+	private $arrErrors = array();
+
+	/**
+	* 
+	* Initialize arrError variable with the error generated 
+	* @param none
+	* @return none
+	*/  
+	public function __construct() 
 	{
+		$this->arrErrors = (array)error_get_last();
+	}
 
-        static $logFile = "error.log";
+	/**
+	* 
+	* Formatting data error 
+	*
+	* @return string
+	*/  
+	public function tpl () 
+	{
+		$tplString = "\n";
 
-        private $arrErrors = array();
+		foreach ($this->arrErrors as $key => $val) 
+		{
+			$tplString .= "\t".strtoupper($key)."\t: {$val} \n";
+		}
 
-        /**
-        * 
-        * Initialize arrError variable with the error generated 
-        * @param none
-        * @return none
-        */  
-        public function __construct() 
-        {
-            $this->arrErrors = (array)error_get_last();
-        }
+		$tplString .= "\tDATE\t: ".date("l jS \of F Y h:i:s A")."\n";
 
-        /**
-        * 
-        * Formatting data error 
-        *
-        * @return string
-        */  
-        public function tpl () 
-        {
-            $tplString = "\n";
+		return $tplString;
+	}
 
-            foreach ($this->arrErrors as $key => $val) 
-            {
-                $tplString .= "\t".strtoupper($key)."\t: {$val} \n";
-            }
-
-            $tplString .= "\tDATE\t: ".date("l jS \of F Y h:i:s A")."\n";
-
-            return $tplString;
-        }
-
-        /**
-        * 
-        * Check whether has an error
-        *
-        * @return boolean
-        */  
-        public function hasErrors ()
-        {
-            return $this->arrErrors != NULL;
-        }
+	/**
+	* 
+	* Check whether has an error
+	*
+	* @return boolean
+	*/  
+	public function hasErrors ()
+	{
+		return $this->arrErrors != NULL;
+	}
 
 
-        /**
-        * 
-        * Add additional information that go to be saved into the log file as an error
-        * 
-        * @param array $arr options that go to be saved
-        * @return array
-        */ 
-        public function addOptions($arr = array()) 
-        {
-            if (!$this->hasErrors()) return $this;
+	/**
+	* 
+	* Add additional information that go to be saved into the log file as an error
+	* 
+	* @param array $arr options that go to be saved
+	* @return array
+	*/ 
+	public function addOptions($arr = array()) 
+	{
+		if (!$this->hasErrors()) return $this;
 
-            $this->arrErrors = array_merge($this->arrErrors, $arr);
+		$this->arrErrors = array_merge($this->arrErrors, $arr);
 
-            return $this;
-        }
+		return $this;
+	}
 
-        /**
-        * 
-        * Save all information into the log
-        * 
-        * @param none
-        * @return none
-        */ 
-        public function save ()
-        {
-            if (!$this->hasErrors()) return false;
+	/**
+	* 
+	* Save all information into the log
+	* 
+	* @param none
+	* @return none
+	*/ 
+	public function save ()
+	{
+		if (!$this->hasErrors()) return false;
 
-            $file = fopen(self::$logFile, "a");
+		$file = fopen(self::$logFile, "a");
 
-            fwrite($file, $this->tpl());
+		fwrite($file, $this->tpl());
 
-            fclose($file);
-        }
+		fclose($file);
+	}
 
-    }
+}
 
 ?>
